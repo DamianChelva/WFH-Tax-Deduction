@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>WFH Tax Deduction Calculator (Australia)</title>
+    <style>
+        body { font-family: Arial; margin: 20px; padding: 10px; max-width: 900px; }
+        label, input { display: block; margin: 5px 0; }
+        input[type=submit] { margin-top: 15px; }
+        .section { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>WFH Tax Deduction Calculator (Actual Method)</h1>
+    <form method="POST">
+        <div class="section">
+            <h2>Section 1: Running Expenses</h2>
+            <label>Internet Usage (%) <input type="number" name="internet_usage" value="0.75" step="0.01"></label>
+            <label>Internet Monthly Cost ($) <input type="number" name="internet_cost" value="95"></label>
+
+            <label>Laptop Hours/week <input type="number" name="laptop_hours" value="38"></label>
+            <label>Monitor Hours/week <input type="number" name="monitor_hours" value="39"></label>
+            <label>Air Con Hours/week <input type="number" name="aircon_hours" value="40"></label>
+            <label>Electricity Rate ($/kWh) <input type="number" name="electricity_rate" value="0.30" step="0.01"></label>
+            <label>Air Con Rate ($/hour) <input type="number" name="aircon_rate" value="0.306" step="0.001"></label>
+
+            <label>Mobile Usage (%) <input type="number" name="mobile_usage" value="0.75" step="0.01"></label>
+            <label>Mobile Monthly Cost ($) <input type="number" name="mobile_cost" value="55"></label>
+
+            <label>Office Supplies ($) <input type="number" name="office_supplies" value="295"></label>
+            <label>Cleaning Usage (%) <input type="number" name="cleaning_percent" value="0.2" step="0.01"></label>
+            <label>Annual Cleaning Cost ($) <input type="number" name="cleaning_cost" value="250"></label>
+        </div>
+
+        <div class="section">
+            <h2>Section 2: Occupancy Expenses</h2>
+            <label>Rent per Week ($) <input type="number" name="rent_per_week" value="360"></label>
+            <label>Weeks Worked From Home <input type="number" name="rent_weeks" value="48"></label>
+            <label>Floor Area Used (%) <input type="number" name="floor_percent" value="0.15" step="0.01"></label>
+        </div>
+
+        <input type="submit" value="Calculate Deduction">
+    </form>
+
+    {% if show_result %}
+    <div class="section">
+        <h2>Results</h2>
+        <p><strong>Total Running Expenses:</strong> ${{ total_running_expenses }}</p>
+        <p><strong>Occupancy Expenses:</strong> ${{ occupancy_expense }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>
+

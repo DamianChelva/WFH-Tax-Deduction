@@ -1,0 +1,51 @@
+from flask import Flask, render_template, request
+
+app = Flask(__name__)
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
+    if request.method == 'POST':
+        # Get form data
+        internet_usage = float(request.form['internet_usage'])
+        internet_cost = float(request.form['internet_cost'])
+
+        laptop_hours = float(request.form['laptop_hours'])
+        monitor_hours = float(request.form['monitor_hours'])
+        aircon_hours = float(request.form['aircon_hours'])
+        electricity_rate = float(request.form['electricity_rate'])
+        aircon_rate = float(request.form['aircon_rate'])
+
+        mobile_usage = float(request.form['mobile_usage'])
+        mobile_cost = float(request.form['mobile_cost'])
+
+        office_supplies = float(request.form['office_supplies'])
+        cleaning_percent = float(request.form['cleaning_percent'])
+        cleaning_cost = float(request.form['cleaning_cost'])
+
+        rent_per_week = float(request.form['rent_per_week'])
+        rent_weeks = float(request.form['rent_weeks'])
+        floor_percent = float(request.form['floor_percent'])
+
+        # Calculations
+        annual_internet = internet_usage * internet_cost * 12
+        annual_laptop = (laptop_hours * electricity_rate * 4.33 * 12)
+        annual_monitor = (monitor_hours * electricity_rate * 4.33 * 12)
+        annual_aircon = (aircon_hours * aircon_rate * 4.33 * 12)
+        annual_mobile = mobile_usage * mobile_cost * 12
+        annual_cleaning = cleaning_percent * cleaning_cost
+
+        total_running_expenses = annual_internet + annual_laptop + annual_monitor + annual_aircon + annual_mobile + office_supplies + annual_cleaning
+
+        rent_total = rent_per_week * rent_weeks
+        occupancy_expense = rent_total * floor_percent
+
+        return render_template('index.html', 
+            total_running_expenses=round(total_running_expenses, 2), 
+            occupancy_expense=round(occupancy_expense, 2),
+            show_result=True)
+
+    return render_template('index.html', show_result=False)
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
