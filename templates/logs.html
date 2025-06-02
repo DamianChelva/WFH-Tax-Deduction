@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <title>Access Logs</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding: 20px; }
-    pre { background: #f4f4f4; padding: 15px; border: 1px solid #ccc; }
-  </style>
+    <title>Access Logs</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f7f7f7; }
+        h1 { color: #333; }
+        pre {
+            background: #fff;
+            padding: 15px;
+            border: 1px solid #ccc;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+    </style>
 </head>
 <body>
-  <h1>User Access Logs</h1>
-  <pre>
-{% for line in logs %}
-{{ line }}
-{% endfor %}
-  </pre>
-  <p><a href="/">Back to Form</a></p>
+    <h1>Access Logs</h1>
+    <pre>{{ logs|join('') }}</pre>
 </body>
 </html>
+
