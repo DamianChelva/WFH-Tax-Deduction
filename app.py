@@ -13,7 +13,7 @@ users = {
 }
 
 # File to store logs
-LOG_FILE = "access_logs.txt"
+LOG_FILE = "/var/log/wfhapp/access_logs.txt"
 
 # IP addresses allowed to access /view_logs
 ALLOWED_IPS = {"116.240.46.17"}  # <-- Replace with your actual IP(s)
