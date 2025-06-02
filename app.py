@@ -1,6 +1,39 @@
 from flask import Flask, render_template, request
+from flask_httpauth import HTTPBasicAuth
+from werkzeug.security import check_password_hash, generate_password_hash
+
 
 app = Flask(__name__)
+
+auth = HTTPBasicAuth()
+
+# Simple user store with hashed passwords
+users = {
+    "admin": generate_password_hash("your_secure_password")
+}
+
+@auth.verify_password
+def verify_password(username, password):
+    if username in users and check_password_hash(users.get(username), password):
+        return username
+    
+@app.route('/view_logs', methods=['GET'])
+@auth.login_required
+def view_logs():
+    if not os.path.exists(LOG_FILE):
+        logs = ["No logs yet."]
+    else:
+        with open(LOG_FILE, "r") as f:
+            logs = f.readlines()
+
+    return render_template('logs.html', logs=logs)
+
+users = {
+    "admin": generate_password_hash("1Qaz2wsx!@!007")
+}
+
+
+
 
 @app.route('/', methods=['GET'])
 def index():
@@ -30,3 +63,30 @@ def calculate():
 if __name__ == '__main__':
     app.run()
 
+from datetime import datetime
+import os
+
+LOG_FILE = "access_logs.txt"
+
+# Modify the index route to log visits
+@app.route('/', methods=['GET'])
+def index():
+    ip = request.remote_addr
+    timestamp = datetime.utcnow().strftime('%Y-%m-%d %H:%M:%S')
+    user_agent = request.headers.get('User-Agent', 'Unknown')
+
+    with open(LOG_FILE, "a") as f:
+        f.write(f"{timestamp} | IP: {ip} | Agent: {user_agent}\n")
+
+    return render_template('form.html')
+
+# Add a route to view the logs
+@app.route('/view_logs', methods=['GET'])
+def view_logs():
+    if not os.path.exists(LOG_FILE):
+        logs = ["No logs yet."]
+    else:
+        with open(LOG_FILE, "r") as f:
+            logs = f.readlines()
+
+    return render_template('logs.html', logs=logs)
