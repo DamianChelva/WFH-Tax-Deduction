@@ -9,7 +9,8 @@ auth = HTTPBasicAuth()
 
 # Secure user credentials (hashed password)
 users = {
-    "admin": generate_password_hash("1Qaz2wsx!@!007")
+    #"admin": generate_password_hash("1Qaz2wsx!@!007")
+    "admin": "1Qaz2wsx!@!007"
 }
 
 # File to store logs
@@ -19,8 +20,11 @@ LOG_FILE = "/var/log/wfhapp/access_logs.txt"
 ALLOWED_IPS = {"116.240.46.17"}  # <-- Replace with your actual IP(s)
 
 @auth.verify_password
+#def verify_password(username, password):
+#    if username in users and check_password_hash(users.get(username), password):
+#        return username
 def verify_password(username, password):
-    if username in users and check_password_hash(users.get(username), password):
+    if username in users and users[username] == password:
         return username
 
 @app.route('/', methods=['GET'])
