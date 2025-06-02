@@ -10,7 +10,7 @@ auth = HTTPBasicAuth()
 # Secure user credentials (hashed password)
 users = {
     #"admin": generate_password_hash("1Qaz2wsx!@!007")
-    "admin": "1Qaz2wsx!@!007"
+    "admin": "Test@2025$$"
 }
 
 # File to store logs
