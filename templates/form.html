@@ -227,6 +227,7 @@
             <option value="office_supplies">📝 Office Supplies</option>
             <option value="cleaning">🧽 Cleaning</option>
             <option value="laptop">💻 Electricity (Laptop)</option>
+            <option value="desktop">🖥️ Electricity (Desktop)</option>
             <option value="monitors">🖥️ Electricity (Monitors)</option>
             <option value="aircon">❄️ Electricity (Air Con)</option>
             <option value="lighting">💡 Electricity (Lighting)</option>
@@ -297,6 +298,7 @@
 
     const electricityDefaults = {
       laptop: { kWh: 0.3 },
+      desktop: { kWh: 0.3 },
       monitors: { kWh: 0.2 },
       aircon: { kWh: 0.306 },
       lighting: { kWh: 0.15 }
@@ -308,7 +310,7 @@
 
       let kWhInput = "", hoursInput = "";
 
-      if (item.includes("electricity") || ["laptop", "monitors", "aircon", "lighting"].includes(item)) {
+      if (item.includes("electricity") || ["laptop", "desktop", "monitors", "aircon", "lighting"].includes(item)) {
         kWhInput = `<td><input type='number' value='${electricityDefaults[item].kWh}' step='0.01' class='kwh' /></td>`;
         hoursInput = `<td><input type='number' class='weekHours' oninput='updateMonthHours(this)' value='38' /></td><td><input type='number' class='monthHours' readonly /></td>`;
       } else {
