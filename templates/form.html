@@ -189,6 +189,11 @@
       color: #856404;
       margin-bottom: 15px;
     }
+    .table-container {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 20px 0;
+    }
     .footer {
       text-align: center;
       padding: 20px;
@@ -197,13 +202,47 @@
       font-size: 0.9rem;
     }
     @media (max-width: 768px) {
-      .content { padding: 20px; }
-      .header h1 { font-size: 2rem; }
-      .add-item { flex-direction: column; align-items: stretch; }
-      .add-item select { min-width: auto; }
-      table { font-size: 0.8rem; }
-      th, td { padding: 8px 4px; }
-      td input { width: 60px; }
+      body { padding: 10px; }
+      .content { padding: 15px; }
+      .header h1 { font-size: 1.8rem; }
+      .header p { font-size: 1rem; }
+      .section { padding: 20px 15px; }
+      .section h2 { font-size: 1.4rem; }
+      .add-item { flex-direction: column; align-items: stretch; gap: 10px; }
+      .add-item select { min-width: auto; font-size: 16px; }
+      .btn { font-size: 16px; padding: 14px 20px; }
+      
+      /* Mobile table styling */
+      .table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+      table { min-width: 600px; font-size: 0.75rem; }
+      th, td { padding: 6px 3px; }
+      th { font-size: 0.7rem; }
+      td input { width: 50px; font-size: 14px; padding: 4px; }
+      .btn-danger { padding: 6px 10px; font-size: 0.75rem; }
+      
+      /* Mobile occupancy inputs */
+      .occupancy-inputs { grid-template-columns: 1fr; gap: 15px; }
+      .input-group input { font-size: 16px; padding: 14px; }
+      
+      /* Mobile totals */
+      .total-section { padding: 15px; }
+      .total-section h3 { font-size: 1.2rem; }
+      .total-amount { font-size: 1.5rem !important; }
+      
+      /* Mobile disclaimer */
+      .disclaimer { padding: 15px; font-size: 0.9rem; }
+      .disclaimer h2 { font-size: 1.2rem; }
+      
+      /* Mobile footer */
+      .footer { padding: 15px; font-size: 0.85rem; }
+    }
+    
+    @media (max-width: 480px) {
+      .header h1 { font-size: 1.5rem; }
+      .section h2 { font-size: 1.2rem; }
+      table { min-width: 500px; font-size: 0.7rem; }
+      td input { width: 45px; }
+      .total-amount { font-size: 1.3rem !important; }
     }
   </style>
 </head>
@@ -236,21 +275,23 @@
           <button class="btn" onclick="addItem()">➕ Add Item</button>
         </div>
 
-        <table id="section1Table">
-          <thead>
-            <tr>
-              <th>Item</th>
-              <th>Usage %</th>
-              <th>Rate</th>
-              <th>Hours/Week</th>
-              <th>Hours/Month</th>
-              <th>kWh</th>
-              <th>Annual Cost ($)</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
+        <div class="table-container">
+          <table id="section1Table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Usage %</th>
+                <th>Rate</th>
+                <th>Hours/Week</th>
+                <th>Hours/Month</th>
+                <th>kWh</th>
+                <th>Annual Cost ($)</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
 
         <button class="btn" onclick="calculateSection1()">🧮 Calculate Section 1 Total</button>
         
